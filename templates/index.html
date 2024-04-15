@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Gemini_RAG</title>
+</head>
+<body>
+    <h1>Gemini RAG</h1>
+    <!-- Flask-WTF 폼 필드와 파일 업로드를 위한 enctype 설정 -->
+    <form action="/" method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }} <!-- CSRF 토큰 필드 -->
+        <label for="pdf">{{ form.question.label }}</label>
+        {{ form.question(size=40) }} <!-- 질문 필드 -->
+        <input type="file" name="pdf" required> <!-- 파일 업로드 필드 -->
+        {{ form.submit() }} <!-- 제출 버튼 -->
+    </form>
+
+    <h2>답변</h2>
+    {% if answer %}
+        <p>{{ answer }}</p> <!-- 답변 출력 -->
+    {% elif request.method == 'POST' %}
+        <p>답변을 기다리는 중...</p> <!-- 답변 처리 중 메시지 -->
+    {% else %}
+        <p>질문과 관련된 PDF 파일을 업로드해주세요.</p> <!-- 초기 안내 메시지 -->
+    {% endif %}
+
+    <form method="POST">
+        <input type="hidden" name="action" value="delete_files">
+        <input type="submit" value="업로드된 파일 삭제">
+    </form>
+
+</body>
+</html>

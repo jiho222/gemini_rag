@@ -1,0 +1,11 @@
+google-generativeai
+python-dotenv
+langchain-community
+tiktoken
+pypdf
+sentence_transformers
+chromadb
+flask==3.0.0
+python-dotenv==1.0.0
+Markdown==3.5.2
+Flask-WTF
